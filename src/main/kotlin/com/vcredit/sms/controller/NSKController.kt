@@ -1,11 +1,10 @@
 package com.vcredit.sms.controller
 
+import com.vcredit.sms.domain.MessageDto
 import com.vcredit.sms.domain.ShortMessageInfo
 import com.vcredit.sms.service.NSKService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 class UserController {
@@ -15,6 +14,16 @@ class UserController {
     @GetMapping("/sms/{batchId}")
     fun queryUserById(@PathVariable batchId: String): List<ShortMessageInfo> {
         return nSKService.getListInfo(batchId)
+    }
+
+    @PostMapping("/sms/send")
+    fun sendMessage(@RequestParam("msg") msg: String, @RequestParam("receiveTelephone") phone: String): String {
+        return if (nSKService.insertMessage(msg, phone) > 0) "0,true" else "null"
+    }
+
+    @GetMapping("/sms/getList")
+    fun getList(): List<MessageDto> {
+        return nSKService.getListInfo()
     }
 }
 
