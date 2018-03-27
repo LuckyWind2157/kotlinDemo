@@ -1,0 +1,16 @@
+server:
+  port: 9091
+  servlet:
+    context-path: /api
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@10.138.61.21:1521:orcl
+    username: three_pp
+    password: three_pp
+    driverClassName: oracle.jdbc.driver.OracleDriver
+logging:
+  level:
+    com:
+      vcredit:
+        sms:
+          repository: debug
