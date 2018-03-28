@@ -17,7 +17,7 @@ class UserController {
     }
 
     @PostMapping("/sms/send")
-    fun sendMessage(@RequestParam("msg") msg: String, @RequestParam("receiveTelephone") phone: String): String {
+    fun sendMessage(@RequestParam("msg") msg: String, @RequestParam("mobs") phone: String): String {
         return if (nSKService.insertMessage(msg, phone) > 0) "0,true" else "null"
     }
 
